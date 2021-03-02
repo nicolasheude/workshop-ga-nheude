@@ -2,8 +2,8 @@ name: Tests
 
 on:
   push:
-    - main
-    - dev
+    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   hello-world:
