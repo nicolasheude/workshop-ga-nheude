@@ -17,9 +17,7 @@ jobs:
 
   unit-test:
     runs-on: ubuntu-20.04
-    
+
     steps:
     - name: unit-test
-      run: |
-        make tests_run
-        make coverage
+      run: make tests_run
