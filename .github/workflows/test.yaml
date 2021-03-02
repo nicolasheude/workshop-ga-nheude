@@ -14,3 +14,8 @@ jobs:
     steps:
     - name: Say hello world
       run: echo "Welcome to the Github Actions workshop !"
+
+    - name: unit-test
+      run: |
+        make tests_run
+        make coverage
