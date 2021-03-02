@@ -4,10 +4,13 @@ on:
   push:
     branches: [ main ]
     branches: [ dev ]
+    
+  workflow_dispatch:
 
 jobs:
   hello-world:
     runs-on: ubuntu-20.04
+
     steps:
-    - id: Say hello world
+      - id: Say hello world
       run: echo "Welcome to the Github Actions workshop !"
