@@ -41,9 +41,10 @@ jobs:
   function-tests_outputs:
     runs-on: ubuntu-20.04
     name: function-tests_outputs
-    container: epitechcontent/epitest-docker
+
     steps:
     - uses: actions/checkout@v1
+    - run: mkdir -p output/tests/
     - name: ForMake
       run: "make re"
     - name: functional_tests
