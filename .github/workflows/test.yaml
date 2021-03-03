@@ -45,12 +45,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: mkdir -p output/tests/
-    - name: ForMake
-      run: "make re"
     - name: functional_tests
       run: |
-        "make"
-        "./functional-test.sh > output/tests/tests_output"
+        make
+        ./functional-test.sh > output/tests/tests_output
     - uses: actions/upload-artifact@v2
       with:
         name: upload_artifacts
