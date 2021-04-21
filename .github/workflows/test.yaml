@@ -1,18 +1,19 @@
 name: Tests
 
 on:
-  push:
+  pull_request:
     branches:
-    - main
-    - dev
+      - master
+      - dev
 
 jobs:
   hello-world:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: Say hello world
-      run: echo "Welcome to the Github Actions workshop !"
+      - name: Say hello world
+        shell: bash
+        run: echo Welcome to the github Action workshop !
 
   unit-tests:
     runs-on: ubuntu-20.04
@@ -33,4 +34,30 @@ jobs:
       - name: Get coverage
         if: ${{ always() }} # Always upload logs even on lose
         shell: bash
-        run: make coverage
+        run: make coverage > coverage_outputs
+
+      - name: Upload corevage artifact
+        if: ${{ always() }} # Always upload logs even on lose
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage_outputs
+          path: ./coverage_outputs
+
+  functional-tests:
+    runs-on: ubuntu-20.04
+    container: docker://epitechcontent/epitest-docker
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        shell: bash
+        run: make && ./functional-test.sh > functional-tests_outputs
+
+      - name: Upload tests artifacts
+        if: ${{ always() }} # Always upload logs even on lose
+        uses: actions/upload-artifact@v2
+        with:
+          name: functional-tests_outputs
+          path: ./functional-tests_outputs
